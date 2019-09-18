@@ -1,1 +1,53 @@
+一.JDK安装 
+    1.JDK下载
+    安装包下载路径：[http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html]
+    (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html?spm=5176.doc51376.2.8.djKg53)
 
+    2.将下载好的JDK包上传到服务器/mnt目录上（这里就要用到WinSCP或其他文件上传下载软件）
+
+    3.新建jdk目录
+        [root@localhost ~]# cd /usr/
+        [root@localhost usr]# mkdir java
+        [root@localhost usr]# cd java/
+        [root@localhost java]# mkdir jdk
+        [root@localhost java]# cd jdk
+        [root@localhost jdk]#
+
+    4.解压下载的jdk包至该目录上
+        [root@localhost mnt]# tar -xvf jdk-8u121-linux-x64.tar.gz -C /usr/java/jdk/
+    
+    5.配置环境变量
+        [root@localhost mnt]# vi /etc/profile
+        在底部添加
+        #set java environment
+        export JAVA_HOME=/usr/java/jdk/jdk1.8.0_121
+        export JRE_HOME=/usr/java/jdk/jdk1.8.0_121/jre
+        export CLASSPATH=.:$JAVA_HOME/lib$:JRE_HOME/lib:$CLASSPATH
+        export PATH=$JAVA_HOME/bin:$JRE_HOME/bin/$JAVA_HOME:$PATH
+        执行命令使环境变量生效
+        [root@localhost mnt]# source /etc/profile
+    
+    6.检测是否生效
+        [root@localhost ~]# java -version
+        
+二.Tomcat安装
+    1.Tomcat下载：
+        安装包下载路径：http://tomcat.apache.org/download-80.cgi
+    
+    2.新建tomcat目录：
+        [root@localhost ~]# cd /usr/java
+        [root@localhost java]# mkdir tomcat
+        [root@localhost java]# cd tomcat
+        [root@localhost tomcat]#
+    
+    3.解压apache-tomcat-8.5.12.tar.gz：
+        tar -xvf apache-tomcat-8.5.12.tar.gz -C /usr/java/tomcat/
+        
+    4.在tomcat 的bin中配置环境变量
+        [root@localhost apache-tomcat-8.5.12]# cd bin/
+        编辑setclasspath.sh脚本：
+        export JAVA_HOME=/usr/java/jdk/jdk1.8.0_121
+        export JRE_HOME=/usr/java/jdk/jdk1.8.0_121/jre
+    
+    5.启动tomcat
+        [root@localhost bin]# ./startup.sh
